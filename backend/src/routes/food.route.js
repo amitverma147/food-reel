@@ -1,6 +1,6 @@
 import express from "express";
-import { createFoodItem } from "../controllers/food.controller.js";
-import authFoodPartnerMiddleware from "../middlewares/auth.middleware.js";
+import { createFoodItem, getAllFoodItems } from "../controllers/food.controller.js";
+import { authFoodPartnerMiddleware, authUserMiddleware } from "../middlewares/auth.middleware.js";
 import upload from "../utils/upload/multer.js";
 
 const router = express.Router();
@@ -11,5 +11,7 @@ router.post(
   upload.single("video"),
   createFoodItem
 );
+
+router.get("/", authUserMiddleware,getAllFoodItems )
 
 export default router;

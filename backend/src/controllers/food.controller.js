@@ -20,7 +20,6 @@ const createFoodItem = async (req, res) => {
       message: "Food item created successfully",
       food: newFood,
     });
-    
   } catch (error) {
     return res
       .status(500)
@@ -28,4 +27,17 @@ const createFoodItem = async (req, res) => {
   }
 };
 
-export { createFoodItem };
+const getAllFoodItems = async (req, res) => {
+  try {
+    const foodItems = await Food.find({});
+    return res
+      .status(200)
+      .json({ message: " Food items fetched successfully ", foodItems });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
+  }
+};
+
+export { createFoodItem, getAllFoodItems };
